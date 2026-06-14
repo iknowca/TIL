@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "src/chapter2/guessing_game"
+]
+resolver = "3"
