@@ -21,7 +21,7 @@ def download_and_unzip_spam_data(
     with zipfile.ZipFile(zip_path, "r") as zip_ref:
         zip_ref.extractall(extracted_path)
         original_file_path = Path(extracted_path) / "SMSSpamCollection"
-        os.rename(original_file_path, data_file_path.parent)
+        os.rename(original_file_path, data_file_path)
         print(f"Data file saved to: {data_file_path}")
 
 if __name__ == "__main__":
