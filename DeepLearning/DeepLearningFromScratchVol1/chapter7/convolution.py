@@ -1,7 +1,7 @@
 import os, sys
 sys.path.append(os.pardir)
 
-from common.util import im2col
+from common.util import im2col, col2im
 import numpy as np
 
 class Convolution:
@@ -10,6 +10,12 @@ class Convolution:
         self.b = b
         self.stride = stride
         self.pad = pad
+
+        self.x = None
+        self.col = None
+        self.col_W = None
+        self.dW = None
+        self.db = None
 
     def forward(self, x):
         FN, C, FH, FW = self.W.shape
@@ -23,4 +29,21 @@ class Convolution:
 
         out = out.reshape(N, out_h, out_w, -1).transpose(0, 3, 1, 2)
 
+        self.x = x
+        self.col = col
+        self.col_W = col_W
+
         return out
+
+    def backward(self, dout):
+        FN, C, FH, FW = self.W.shape
+        dout = dout.transpose(0,2,3,1).reshape(-1, FN)
+
+        self.db = np.sum(dout, axis=0)
+        self.dW = np.dot(self.col.T, dout)
+        self.dW = self.dW.transpose(1, 0).reshape(FN, C, FH, FW)
+
+        dcol = np.dot(dout, self.col_W.T)
+        dx = col2im(dcol, self.x.shape, FH, FW, self.stride, self.pad)
+
+        return dx
