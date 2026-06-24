@@ -2,6 +2,7 @@ from collections import OrderedDict
 
 import numpy as np
 import sys, os
+import pickle
 
 from common.layers import Relu, SoftmaxWithLoss
 from common.layers import Affine
@@ -87,3 +88,20 @@ class SimpleConvNet:
             acc += np.sum(y == tt)
 
         return acc / x.shape[0]
+
+    def save_params(self, file_name="params.pkl"):
+        params = {}
+        for key, val in self.params.items():
+            params[key] = val
+        with open(file_name, 'wb') as f:
+            pickle.dump(params, f)
+
+    def load_params(self, file_name="params.pkl"):
+        with open(os.path.dirname(__file__) + '/' + file_name, 'rb') as f:
+            params = pickle.load(f)
+        for key, val in params.items():
+            self.params[key] = val
+
+        for i, key in enumerate(['Conv1', 'Affine1', 'Affine2']):
+            self.layers[key].W = self.params['W' + str(i+1)]
+            self.layers[key].b = self.params['b' + str(i+1)]
