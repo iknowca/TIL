@@ -1,0 +1,97 @@
+.not-found-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100vh;
+    padding: 24px;
+
+    background: #f7f8fa;
+}
+
+.not-found-container {
+    width: 100%;
+    max-width: 480px;
+
+    text-align: center;
+}
+
+/* 404 */
+
+.not-found-code {
+    margin-bottom: 16px;
+
+    font-size: 96px;
+    font-weight: 700;
+    line-height: 1;
+
+    letter-spacing: -4px;
+
+    color: #cbd5e1;
+
+    user-select: none;
+}
+
+/* Title */
+
+.not-found-title.ant-typography {
+    margin-bottom: 12px;
+
+    font-size: 26px;
+    font-weight: 600;
+
+    letter-spacing: -0.5px;
+
+    color: #18212f;
+}
+
+/* Description */
+
+.not-found-description {
+    display: block;
+
+    margin-bottom: 32px;
+
+    font-size: 14px;
+    line-height: 1.8;
+
+    color: #7b8493;
+}
+
+/* Button */
+
+.not-found-button.ant-btn {
+    height: 42px;
+
+    padding-inline: 24px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    background: #334155;
+
+    border: none;
+    border-radius: 7px;
+
+    box-shadow: none;
+}
+
+.not-found-button.ant-btn:hover {
+    background: #1e293b !important;
+}
+
+.not-found-button.ant-btn:active {
+    background: #0f172a !important;
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+    .not-found-code {
+        font-size: 72px;
+    }
+
+    .not-found-title.ant-typography {
+        font-size: 22px;
+    }
+}
